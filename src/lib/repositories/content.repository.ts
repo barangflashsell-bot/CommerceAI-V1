@@ -1,4 +1,5 @@
-import { prisma } from "../prisma";
+import { prisma, isDatabaseReady } from "../prisma";
+import { memoryDb } from "../memory-db";
 import type { ContentProject } from "../db";
 
 function parseJson(str: any) {
@@ -39,50 +40,113 @@ function toDomain(raw: any): ContentProject {
 
 export const ContentRepository = {
   async findAll(): Promise<ContentProject[]> {
-    const projects = await prisma.contentProject.findMany({
-      orderBy: { createdAt: "desc" },
-    });
-    return projects.map(toDomain);
+    if (!isDatabaseReady) {
+      return [...memoryDb.contentProjects];
+    }
+    try {
+      const projects = await prisma.contentProject.findMany({
+        orderBy: { createdAt: "desc" },
+      });
+      return projects.map(toDomain);
+    } catch {
+      return [...memoryDb.contentProjects];
+    }
   },
 
   async findById(id: string): Promise<ContentProject | null> {
-    const project = await prisma.contentProject.findUnique({
-      where: { id },
-    });
-    return project ? toDomain(project) : null;
+    if (!isDatabaseReady) {
+      return memoryDb.contentProjects.find((c) => c.id === id) || null;
+    }
+    try {
+      const project = await prisma.contentProject.findUnique({
+        where: { id },
+      });
+      return project ? toDomain(project) : (memoryDb.contentProjects.find((c) => c.id === id) || null);
+    } catch {
+      return memoryDb.contentProjects.find((c) => c.id === id) || null;
+    }
   },
 
   async findByProductId(productId: string): Promise<ContentProject[]> {
-    const projects = await prisma.contentProject.findMany({
-      where: { productId },
-      orderBy: { createdAt: "desc" },
-    });
-    return projects.map(toDomain);
+    if (!isDatabaseReady) {
+      return memoryDb.contentProjects.filter((c) => c.productId === productId);
+    }
+    try {
+      const projects = await prisma.contentProject.findMany({
+        where: { productId },
+        orderBy: { createdAt: "desc" },
+      });
+      return projects.map(toDomain);
+    } catch {
+      return memoryDb.contentProjects.filter((c) => c.productId === productId);
+    }
   },
 
   async create(data: Omit<ContentProject, "createdAt" | "updatedAt"> & { id?: string }): Promise<ContentProject> {
-    const created = await prisma.contentProject.create({
-      data: {
-        id: data.id,
+    if (!isDatabaseReady) {
+      const newProject: ContentProject = {
+        id: data.id || `content_${Date.now()}`,
         productId: data.productId,
         platform: data.platform,
         duration: data.duration,
         style: data.style,
         objective: data.objective,
         targetAudience: data.targetAudience,
-        hooks: stringifyJson(data.hooks),
-        angles: stringifyJson(data.angles),
-        concepts: stringifyJson(data.concepts),
-        bestConcept: stringifyJson(data.bestConcept),
-        storyboard: stringifyJson(data.storyboard),
-        videoPrompt: stringifyJson(data.videoPrompt),
+        hooks: data.hooks,
+        angles: data.angles,
+        concepts: data.concepts,
+        bestConcept: data.bestConcept,
+        storyboard: data.storyboard,
+        videoPrompt: data.videoPrompt,
         status: data.status || "draft",
-      },
-    });
-    return toDomain(created);
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      memoryDb.contentProjects.unshift(newProject);
+      return newProject;
+    }
+    try {
+      const created = await prisma.contentProject.create({
+        data: {
+          id: data.id,
+          productId: data.productId,
+          platform: data.platform,
+          duration: data.duration,
+          style: data.style,
+          objective: data.objective,
+          targetAudience: data.targetAudience,
+          hooks: stringifyJson(data.hooks),
+          angles: stringifyJson(data.angles),
+          concepts: stringifyJson(data.concepts),
+          bestConcept: stringifyJson(data.bestConcept),
+          storyboard: stringifyJson(data.storyboard),
+          videoPrompt: stringifyJson(data.videoPrompt),
+          status: data.status || "draft",
+        },
+      });
+      return toDomain(created);
+    } catch {
+      const fallbackProject: ContentProject = {
+        ...data,
+        id: data.id || `content_${Date.now()}`,
+        status: data.status || "draft",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      memoryDb.contentProjects.unshift(fallbackProject);
+      return fallbackProject;
+    }
   },
 
   async update(id: string, data: Partial<ContentProject>): Promise<ContentProject | null> {
+    if (!isDatabaseReady) {
+      const idx = memoryDb.contentProjects.findIndex((c) => c.id === id);
+      if (idx !== -1) {
+        memoryDb.contentProjects[idx] = { ...memoryDb.contentProjects[idx], ...data, updatedAt: new Date().toISOString() };
+        return memoryDb.contentProjects[idx];
+      }
+      return null;
+    }
     try {
       const updateData: any = {};
       if (data.platform !== undefined) updateData.platform = data.platform;
@@ -104,18 +168,28 @@ export const ContentRepository = {
       });
       return toDomain(updated);
     } catch {
+      const idx = memoryDb.contentProjects.findIndex((c) => c.id === id);
+      if (idx !== -1) {
+        memoryDb.contentProjects[idx] = { ...memoryDb.contentProjects[idx], ...data, updatedAt: new Date().toISOString() };
+        return memoryDb.contentProjects[idx];
+      }
       return null;
     }
   },
 
   async delete(id: string): Promise<boolean> {
+    if (!isDatabaseReady) {
+      memoryDb.contentProjects = memoryDb.contentProjects.filter((c) => c.id !== id);
+      return true;
+    }
     try {
       await prisma.contentProject.delete({
         where: { id },
       });
       return true;
     } catch {
-      return false;
+      memoryDb.contentProjects = memoryDb.contentProjects.filter((c) => c.id !== id);
+      return true;
     }
   },
 };

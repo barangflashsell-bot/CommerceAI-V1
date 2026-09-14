@@ -19,4 +19,10 @@ export const prisma =
     log: process.env.NODE_ENV === "development" ? ["warn", "error"] : ["error"],
   });
 
+export const isDatabaseReady = Boolean(
+  process.env.DATABASE_URL &&
+  !process.env.DATABASE_URL.includes("placeholder") &&
+  process.env.DATABASE_URL.startsWith("postgres")
+);
+
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;

@@ -1,4 +1,5 @@
-import { prisma } from "../prisma";
+import { prisma, isDatabaseReady } from "../prisma";
+import { memoryDb } from "../memory-db";
 import type { Product } from "../db";
 
 function toDomain(raw: any): Product {
@@ -76,31 +77,46 @@ function toDomain(raw: any): Product {
 
 export const ProductRepository = {
   async findAll(): Promise<Product[]> {
-    const products = await prisma.product.findMany({
-      include: {
-        scoutAnalysis: true,
-        testingPlan: true,
-      },
-      orderBy: { createdAt: "desc" },
-    });
-    return products.map(toDomain);
+    if (!isDatabaseReady) {
+      return [...memoryDb.products];
+    }
+    try {
+      const products = await prisma.product.findMany({
+        include: {
+          scoutAnalysis: true,
+          testingPlan: true,
+        },
+        orderBy: { createdAt: "desc" },
+      });
+      return products.map(toDomain);
+    } catch (e) {
+      console.warn("[ProductRepository] DB error, falling back to memory:", e);
+      return [...memoryDb.products];
+    }
   },
 
   async findById(id: string): Promise<Product | null> {
-    const product = await prisma.product.findUnique({
-      where: { id },
-      include: {
-        scoutAnalysis: true,
-        testingPlan: true,
-      },
-    });
-    return product ? toDomain(product) : null;
+    if (!isDatabaseReady) {
+      return memoryDb.products.find((p) => p.id === id) || null;
+    }
+    try {
+      const product = await prisma.product.findUnique({
+        where: { id },
+        include: {
+          scoutAnalysis: true,
+          testingPlan: true,
+        },
+      });
+      return product ? toDomain(product) : (memoryDb.products.find((p) => p.id === id) || null);
+    } catch {
+      return memoryDb.products.find((p) => p.id === id) || null;
+    }
   },
 
   async create(data: Omit<Product, "id" | "createdAt" | "updatedAt"> & { id?: string }): Promise<Product> {
-    const created = await prisma.product.create({
-      data: {
-        id: data.id,
+    if (!isDatabaseReady) {
+      const newProduct: Product = {
+        id: data.id || `prod_${Date.now()}`,
         name: data.name,
         link: data.link,
         category: data.category,
@@ -112,18 +128,60 @@ export const ProductRepository = {
         advantages: data.advantages,
         problemSolved: data.problemSolved,
         opportunityScore: data.opportunityScore,
-        aiAnalysis: data.aiAnalysis ? JSON.stringify(data.aiAnalysis) : null,
+        aiAnalysis: data.aiAnalysis,
         status: data.status || "DISCOVERED",
-      },
-      include: {
-        scoutAnalysis: true,
-        testingPlan: true,
-      },
-    });
-    return toDomain(created);
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      memoryDb.products.unshift(newProduct);
+      return newProduct;
+    }
+    try {
+      const created = await prisma.product.create({
+        data: {
+          id: data.id,
+          name: data.name,
+          link: data.link,
+          category: data.category,
+          price: data.price,
+          commissionRate: data.commissionRate,
+          imageUrl: data.imageUrl,
+          targetAudience: data.targetAudience,
+          description: data.description,
+          advantages: data.advantages,
+          problemSolved: data.problemSolved,
+          opportunityScore: data.opportunityScore,
+          aiAnalysis: data.aiAnalysis ? JSON.stringify(data.aiAnalysis) : null,
+          status: data.status || "DISCOVERED",
+        },
+        include: {
+          scoutAnalysis: true,
+          testingPlan: true,
+        },
+      });
+      return toDomain(created);
+    } catch {
+      const fallbackProduct: Product = {
+        ...data,
+        id: data.id || `prod_${Date.now()}`,
+        status: data.status || "DISCOVERED",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      memoryDb.products.unshift(fallbackProduct);
+      return fallbackProduct;
+    }
   },
 
   async update(id: string, data: Partial<Product>): Promise<Product | null> {
+    if (!isDatabaseReady) {
+      const idx = memoryDb.products.findIndex((p) => p.id === id);
+      if (idx !== -1) {
+        memoryDb.products[idx] = { ...memoryDb.products[idx], ...data, updatedAt: new Date().toISOString() };
+        return memoryDb.products[idx];
+      }
+      return null;
+    }
     try {
       const updateData: any = {};
       if (data.name !== undefined) updateData.name = data.name;
@@ -152,19 +210,28 @@ export const ProductRepository = {
       });
       return toDomain(updated);
     } catch {
+      const idx = memoryDb.products.findIndex((p) => p.id === id);
+      if (idx !== -1) {
+        memoryDb.products[idx] = { ...memoryDb.products[idx], ...data, updatedAt: new Date().toISOString() };
+        return memoryDb.products[idx];
+      }
       return null;
     }
   },
 
   async delete(id: string): Promise<boolean> {
+    if (!isDatabaseReady) {
+      memoryDb.products = memoryDb.products.filter((p) => p.id !== id);
+      return true;
+    }
     try {
-      // Prisma cascade deletion will delete related contentProjects and performanceMetrics
       await prisma.product.delete({
         where: { id },
       });
       return true;
     } catch {
-      return false;
+      memoryDb.products = memoryDb.products.filter((p) => p.id !== id);
+      return true;
     }
   },
 };

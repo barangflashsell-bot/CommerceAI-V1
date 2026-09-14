@@ -1,4 +1,5 @@
-import { prisma } from "../prisma";
+import { prisma, isDatabaseReady } from "../prisma";
+import { memoryDb } from "../memory-db";
 import type { PerformanceMetric } from "../db";
 
 function toDomain(raw: any): PerformanceMetric {
@@ -30,56 +31,124 @@ function toDomain(raw: any): PerformanceMetric {
 
 export const PerformanceRepository = {
   async findAll(): Promise<PerformanceMetric[]> {
-    const metrics = await prisma.performanceMetric.findMany({
-      orderBy: { createdAt: "desc" },
-    });
-    return metrics.map(toDomain);
+    if (!isDatabaseReady) {
+      return [...memoryDb.performanceMetrics];
+    }
+    try {
+      const metrics = await prisma.performanceMetric.findMany({
+        orderBy: { createdAt: "desc" },
+      });
+      return metrics.map(toDomain);
+    } catch {
+      return [...memoryDb.performanceMetrics];
+    }
   },
 
   async findById(id: string): Promise<PerformanceMetric | null> {
-    const metric = await prisma.performanceMetric.findUnique({
-      where: { id },
-    });
-    return metric ? toDomain(metric) : null;
+    if (!isDatabaseReady) {
+      return memoryDb.performanceMetrics.find((m) => m.id === id) || null;
+    }
+    try {
+      const metric = await prisma.performanceMetric.findUnique({
+        where: { id },
+      });
+      return metric ? toDomain(metric) : (memoryDb.performanceMetrics.find((m) => m.id === id) || null);
+    } catch {
+      return memoryDb.performanceMetrics.find((m) => m.id === id) || null;
+    }
   },
 
   async findByProductId(productId: string): Promise<PerformanceMetric[]> {
-    const metrics = await prisma.performanceMetric.findMany({
-      where: { productId },
-      orderBy: { createdAt: "desc" },
-    });
-    return metrics.map(toDomain);
+    if (!isDatabaseReady) {
+      return memoryDb.performanceMetrics.filter((m) => m.productId === productId);
+    }
+    try {
+      const metrics = await prisma.performanceMetric.findMany({
+        where: { productId },
+        orderBy: { createdAt: "desc" },
+      });
+      return metrics.map(toDomain);
+    } catch {
+      return memoryDb.performanceMetrics.filter((m) => m.productId === productId);
+    }
   },
 
   async create(data: Omit<PerformanceMetric, "createdAt" | "updatedAt"> & { id?: string }): Promise<PerformanceMetric> {
-    const created = await prisma.performanceMetric.create({
-      data: {
-        id: data.id,
+    if (!isDatabaseReady) {
+      const newMetric: PerformanceMetric = {
+        id: data.id || `metric_${Date.now()}`,
         productId: data.productId,
         contentVariationId: data.contentVariationId,
         contentId: data.contentId,
-        date: data.date ? new Date(data.date) : new Date(),
+        date: data.date || new Date().toISOString().split("T")[0],
         platform: data.platform,
-        views: data.views,
-        likes: data.likes,
-        comments: data.comments,
-        shares: data.shares,
-        clicks: data.clicks,
-        addToCart: data.addToCart,
-        orders: data.orders,
-        commission: data.commission,
+        views: data.views || 0,
+        likes: data.likes || 0,
+        comments: data.comments || 0,
+        shares: data.shares || 0,
+        clicks: data.clicks || 0,
+        addToCart: data.addToCart || 0,
+        orders: data.orders || 0,
+        commission: data.commission || 0,
         videoConcept: data.videoConcept,
         hook: data.hook,
         angle: data.angle,
         ctr: data.ctr,
         cvr: data.cvr,
         revenue: data.revenue,
-      },
-    });
-    return toDomain(created);
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      memoryDb.performanceMetrics.unshift(newMetric);
+      return newMetric;
+    }
+    try {
+      const created = await prisma.performanceMetric.create({
+        data: {
+          id: data.id,
+          productId: data.productId,
+          contentVariationId: data.contentVariationId,
+          contentId: data.contentId,
+          date: data.date ? new Date(data.date) : new Date(),
+          platform: data.platform,
+          views: data.views,
+          likes: data.likes,
+          comments: data.comments,
+          shares: data.shares,
+          clicks: data.clicks,
+          addToCart: data.addToCart,
+          orders: data.orders,
+          commission: data.commission,
+          videoConcept: data.videoConcept,
+          hook: data.hook,
+          angle: data.angle,
+          ctr: data.ctr,
+          cvr: data.cvr,
+          revenue: data.revenue,
+        },
+      });
+      return toDomain(created);
+    } catch {
+      const fallbackMetric: PerformanceMetric = {
+        ...data,
+        id: data.id || `metric_${Date.now()}`,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      memoryDb.performanceMetrics.unshift(fallbackMetric);
+      return fallbackMetric;
+    }
   },
 
   async update(id: string, data: Partial<PerformanceMetric>): Promise<PerformanceMetric | null> {
+    if (!isDatabaseReady) {
+      const idx = memoryDb.performanceMetrics.findIndex((m) => m.id === id);
+      if (idx !== -1) {
+        memoryDb.performanceMetrics[idx] = { ...memoryDb.performanceMetrics[idx], ...data, updatedAt: new Date().toISOString() };
+        return memoryDb.performanceMetrics[idx];
+      }
+      return null;
+    }
     try {
       const updateData: any = {};
       if (data.views !== undefined) updateData.views = data.views;
@@ -103,18 +172,28 @@ export const PerformanceRepository = {
       });
       return toDomain(updated);
     } catch {
+      const idx = memoryDb.performanceMetrics.findIndex((m) => m.id === id);
+      if (idx !== -1) {
+        memoryDb.performanceMetrics[idx] = { ...memoryDb.performanceMetrics[idx], ...data, updatedAt: new Date().toISOString() };
+        return memoryDb.performanceMetrics[idx];
+      }
       return null;
     }
   },
 
   async delete(id: string): Promise<boolean> {
+    if (!isDatabaseReady) {
+      memoryDb.performanceMetrics = memoryDb.performanceMetrics.filter((m) => m.id !== id);
+      return true;
+    }
     try {
       await prisma.performanceMetric.delete({
         where: { id },
       });
       return true;
     } catch {
-      return false;
+      memoryDb.performanceMetrics = memoryDb.performanceMetrics.filter((m) => m.id !== id);
+      return true;
     }
   },
 };

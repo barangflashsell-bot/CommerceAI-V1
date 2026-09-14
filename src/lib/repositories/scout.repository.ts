@@ -1,4 +1,5 @@
-import { prisma } from "../prisma";
+import { prisma, isDatabaseReady } from "../prisma";
+import { memoryDb } from "../memory-db";
 import type {
   ProductPortfolioSummary,
   ProductScoutResult,
@@ -18,9 +19,10 @@ function safeJsonParse<T>(val: string | null | undefined, fallback: T): T {
 
 export const ScoutRepository = {
   async saveScoutAnalysis(productId: string, scout: ProductScoutResult) {
-    return await prisma.scoutAnalysis.upsert({
-      where: { productId },
-      create: {
+    if (!isDatabaseReady) {
+      const existingIdx = memoryDb.scoutAnalyses.findIndex((s) => s.productId === productId);
+      const entry = {
+        id: `scout_${Date.now()}`,
         productId,
         score: scout.score,
         category: scout.category,
@@ -31,25 +33,58 @@ export const ScoutRepository = {
         testingPlan: JSON.stringify(scout.testingPlan),
         expectedGoal: scout.expectedGoal,
         dataSource: scout.dataSource,
-      },
-      update: {
-        score: scout.score,
-        category: scout.category,
-        breakdown: JSON.stringify(scout.breakdown),
-        why: scout.why,
-        risks: JSON.stringify(scout.risks),
-        bestAngles: JSON.stringify(scout.bestAngles),
-        testingPlan: JSON.stringify(scout.testingPlan),
-        expectedGoal: scout.expectedGoal,
-        dataSource: scout.dataSource,
-      },
-    });
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      if (existingIdx !== -1) memoryDb.scoutAnalyses[existingIdx] = entry;
+      else memoryDb.scoutAnalyses.push(entry);
+      return entry;
+    }
+    try {
+      return await prisma.scoutAnalysis.upsert({
+        where: { productId },
+        create: {
+          productId,
+          score: scout.score,
+          category: scout.category,
+          breakdown: JSON.stringify(scout.breakdown),
+          why: scout.why,
+          risks: JSON.stringify(scout.risks),
+          bestAngles: JSON.stringify(scout.bestAngles),
+          testingPlan: JSON.stringify(scout.testingPlan),
+          expectedGoal: scout.expectedGoal,
+          dataSource: scout.dataSource,
+        },
+        update: {
+          score: scout.score,
+          category: scout.category,
+          breakdown: JSON.stringify(scout.breakdown),
+          why: scout.why,
+          risks: JSON.stringify(scout.risks),
+          bestAngles: JSON.stringify(scout.bestAngles),
+          testingPlan: JSON.stringify(scout.testingPlan),
+          expectedGoal: scout.expectedGoal,
+          dataSource: scout.dataSource,
+        },
+      });
+    } catch {
+      return null;
+    }
   },
 
   async getScoutAnalysis(productId: string) {
-    const raw = await prisma.scoutAnalysis.findUnique({
-      where: { productId },
-    });
+    let raw: any = null;
+    if (!isDatabaseReady) {
+      raw = memoryDb.scoutAnalyses.find((s) => s.productId === productId) || null;
+    } else {
+      try {
+        raw = await prisma.scoutAnalysis.findUnique({
+          where: { productId },
+        });
+      } catch {
+        raw = memoryDb.scoutAnalyses.find((s) => s.productId === productId) || null;
+      }
+    }
     if (!raw) return null;
 
     return {
@@ -64,15 +99,16 @@ export const ScoutRepository = {
       testingPlan: safeJsonParse(raw.testingPlan, null),
       expectedGoal: raw.expectedGoal,
       dataSource: raw.dataSource,
-      createdAt: raw.createdAt.toISOString(),
-      updatedAt: raw.updatedAt.toISOString(),
+      createdAt: raw.createdAt instanceof Date ? raw.createdAt.toISOString() : String(raw.createdAt),
+      updatedAt: raw.updatedAt instanceof Date ? raw.updatedAt.toISOString() : String(raw.updatedAt),
     };
   },
 
   async saveTestingPlan(productId: string, plan: TestingPlanConfig) {
-    return await prisma.testingPlan.upsert({
-      where: { productId },
-      create: {
+    if (!isDatabaseReady) {
+      const idx = memoryDb.testingPlans.findIndex((t) => t.productId === productId);
+      const entry = {
+        id: `tp_${Date.now()}`,
         productId,
         testDays: plan.testDays,
         videoCount: plan.videoCount,
@@ -82,24 +118,56 @@ export const ScoutRepository = {
         successCriteria: JSON.stringify(plan.successCriteria),
         thresholdType: plan.thresholdType || "AI TESTING THRESHOLD",
         userCustomThreshold: plan.userCustomThreshold ? JSON.stringify(plan.userCustomThreshold) : null,
-      },
-      update: {
-        testDays: plan.testDays,
-        videoCount: plan.videoCount,
-        angles: JSON.stringify(plan.angles),
-        hooks: JSON.stringify(plan.hooks),
-        platforms: JSON.stringify(plan.platforms),
-        successCriteria: JSON.stringify(plan.successCriteria),
-        thresholdType: plan.thresholdType || "AI TESTING THRESHOLD",
-        userCustomThreshold: plan.userCustomThreshold ? JSON.stringify(plan.userCustomThreshold) : null,
-      },
-    });
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      if (idx !== -1) memoryDb.testingPlans[idx] = entry;
+      else memoryDb.testingPlans.push(entry);
+      return entry;
+    }
+    try {
+      return await prisma.testingPlan.upsert({
+        where: { productId },
+        create: {
+          productId,
+          testDays: plan.testDays,
+          videoCount: plan.videoCount,
+          angles: JSON.stringify(plan.angles),
+          hooks: JSON.stringify(plan.hooks),
+          platforms: JSON.stringify(plan.platforms),
+          successCriteria: JSON.stringify(plan.successCriteria),
+          thresholdType: plan.thresholdType || "AI TESTING THRESHOLD",
+          userCustomThreshold: plan.userCustomThreshold ? JSON.stringify(plan.userCustomThreshold) : null,
+        },
+        update: {
+          testDays: plan.testDays,
+          videoCount: plan.videoCount,
+          angles: JSON.stringify(plan.angles),
+          hooks: JSON.stringify(plan.hooks),
+          platforms: JSON.stringify(plan.platforms),
+          successCriteria: JSON.stringify(plan.successCriteria),
+          thresholdType: plan.thresholdType || "AI TESTING THRESHOLD",
+          userCustomThreshold: plan.userCustomThreshold ? JSON.stringify(plan.userCustomThreshold) : null,
+        },
+      });
+    } catch {
+      return null;
+    }
   },
 
   async getTestingPlan(productId: string) {
-    const raw = await prisma.testingPlan.findUnique({
-      where: { productId },
-    });
+    let raw: any = null;
+    if (!isDatabaseReady) {
+      raw = memoryDb.testingPlans.find((t) => t.productId === productId) || null;
+    } else {
+      try {
+        raw = await prisma.testingPlan.findUnique({
+          where: { productId },
+        });
+      } catch {
+        raw = memoryDb.testingPlans.find((t) => t.productId === productId) || null;
+      }
+    }
     if (!raw) return null;
 
     return {
@@ -116,8 +184,8 @@ export const ScoutRepository = {
       }),
       thresholdType: raw.thresholdType,
       userCustomThreshold: safeJsonParse<TestingPlanSuccessCriteria | null>(raw.userCustomThreshold, null),
-      createdAt: raw.createdAt.toISOString(),
-      updatedAt: raw.updatedAt.toISOString(),
+      createdAt: raw.createdAt instanceof Date ? raw.createdAt.toISOString() : String(raw.createdAt),
+      updatedAt: raw.updatedAt instanceof Date ? raw.updatedAt.toISOString() : String(raw.updatedAt),
     };
   },
 
@@ -131,14 +199,33 @@ export const ScoutRepository = {
   },
 
   async getPortfolio(): Promise<ProductPortfolioSummary> {
-    const products = await prisma.product.findMany({
-      include: {
-        performanceMetrics: true,
-        scoutAnalysis: true,
-        testingPlan: true,
-      },
-      orderBy: { createdAt: "desc" },
-    });
+    let products: any[] = [];
+    if (!isDatabaseReady) {
+      products = memoryDb.products.map((p) => ({
+        ...p,
+        performanceMetrics: memoryDb.performanceMetrics.filter((m) => m.productId === p.id),
+        scoutAnalysis: null,
+        testingPlan: null,
+      }));
+    } else {
+      try {
+        products = await prisma.product.findMany({
+          include: {
+            performanceMetrics: true,
+            scoutAnalysis: true,
+            testingPlan: true,
+          },
+          orderBy: { createdAt: "desc" },
+        });
+      } catch {
+        products = memoryDb.products.map((p) => ({
+          ...p,
+          performanceMetrics: memoryDb.performanceMetrics.filter((m) => m.productId === p.id),
+          scoutAnalysis: null,
+          testingPlan: null,
+        }));
+      }
+    }
 
     let scaleCount = 0;
     let testingCount = 0;
