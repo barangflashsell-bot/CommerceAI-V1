@@ -1,0 +1,424 @@
+[
+  {
+    "id": "007b7d21-7eb8-4461-b371-bbd70753b4e9",
+    "productId": "f9863b66-f500-475a-95ae-779962b86ef5",
+    "platform": "TikTok",
+    "duration": "10",
+    "style": "Problem Solution",
+    "objective": "Click",
+    "targetAudience": "Ibu rumah tangga, pengguna dapur",
+    "hooks": [
+      {
+        "id": 1,
+        "text": "Stop! Jangan beli Rak Piring Stainless Steel 2 Tingkat sebelum nonton ini...",
+        "type": "Curiosity Gap",
+        "strength": "Tinggi"
+      },
+      {
+        "id": 2,
+        "text": "Aku nyesel baru tau Rak Piring Stainless Steel 2 Tingkat sekarang 😭",
+        "type": "Emotional Regret",
+        "strength": "Tinggi"
+      },
+      {
+        "id": 3,
+        "text": "Rak Piring Stainless Steel 2 Tingkat ini bikin hidupku berubah drastis...",
+        "type": "Transformation",
+        "strength": "Tinggi"
+      },
+      {
+        "id": 4,
+        "text": "Kalau kamu masih pakai cara lama, kasian banget...",
+        "type": "Pain Point",
+        "strength": "Sedang"
+      },
+      {
+        "id": 5,
+        "text": "Produk Rp149.000 ini mengalahkan yang jutaan!",
+        "type": "Value Comparison",
+        "strength": "Tinggi"
+      },
+      {
+        "id": 6,
+        "text": "3 detik! Cuma 3 detik pakai Rak Piring Stainless Steel 2 Tingkat dan hasilnya...",
+        "type": "Speed/Result",
+        "strength": "Tinggi"
+      },
+      {
+        "id": 7,
+        "text": "Jangan sampai kamu terlambat kayak aku...",
+        "type": "Urgency",
+        "strength": "Sedang"
+      },
+      {
+        "id": 8,
+        "text": "Review jujur Rak Piring Stainless Steel 2 Tingkat setelah 30 hari pakai",
+        "type": "Honest Review",
+        "strength": "Sedang"
+      },
+      {
+        "id": 9,
+        "text": "POV: kamu akhirnya nemuin solusi buat masalah ini",
+        "type": "POV/Relatable",
+        "strength": "Tinggi"
+      },
+      {
+        "id": 10,
+        "text": "Yang bilang produk murah pasti jelek, coba lihat ini...",
+        "type": "Myth Buster",
+        "strength": "Tinggi"
+      }
+    ],
+    "angles": [
+      {
+        "id": 1,
+        "name": "Problem → Solution",
+        "description": "Tunjukkan masalah yang diselesaikan Rak Piring Stainless Steel 2 Tingkat",
+        "targetEmotion": "Frustrasi → Lega",
+        "score": 92
+      },
+      {
+        "id": 2,
+        "name": "Before → After",
+        "description": "Transformasi visual yang dramatis",
+        "targetEmotion": "Penasaran → Kagum",
+        "score": 87
+      },
+      {
+        "id": 3,
+        "name": "Day in Life",
+        "description": "Integrasikan Rak Piring Stainless Steel 2 Tingkat dalam rutinitas harian",
+        "targetEmotion": "Relate → Tertarik",
+        "score": 78
+      },
+      {
+        "id": 4,
+        "name": "Expert Review",
+        "description": "Ulasan mendalam dengan fakta dan demo",
+        "targetEmotion": "Ragu → Percaya",
+        "score": 75
+      },
+      {
+        "id": 5,
+        "name": "Social Proof",
+        "description": "Reaksi orang lain saat melihat produk",
+        "targetEmotion": "Penasaran → FOMO",
+        "score": 80
+      }
+    ],
+    "concepts": [
+      {
+        "id": 1,
+        "title": "Masalah Sehari-hari",
+        "description": "Video dimulai dengan situasi frustrasi tanpa Rak Piring Stainless Steel 2 Tingkat, lalu transisi ke solusi",
+        "hook": "Stop! Jangan beli Rak Piring Stainless Steel 2 Tingkat sebelum nonton ini...",
+        "angle": "Problem → Solution",
+        "flow": "Hook frustrasi → Tunjukkan masalah → Perkenalkan Rak Piring Stainless Steel 2 Tingkat → Demo solusi → CTA",
+        "expectedImpact": "CTR Tinggi, CVR Sedang-Tinggi"
+      },
+      {
+        "id": 2,
+        "title": "Transformasi Dramatis",
+        "description": "Split screen before-after yang memukau",
+        "hook": "Rak Piring Stainless Steel 2 Tingkat ini bikin hidupku berubah drastis...",
+        "angle": "Before → After",
+        "flow": "Hook transformasi → Before (messy/old) → Proses → After (clean/new) → CTA",
+        "expectedImpact": "Views Tinggi, Share Tinggi"
+      },
+      {
+        "id": 3,
+        "title": "Honest 30-Day Review",
+        "description": "Review jujur setelah pemakaian",
+        "hook": "Review jujur Rak Piring Stainless Steel 2 Tingkat setelah 30 hari pakai",
+        "angle": "Expert Review",
+        "flow": "Hook jujur → Ekspektasi → Realita → Pro & Con → Verdict → CTA",
+        "expectedImpact": "Trust Tinggi, CVR Tinggi"
+      },
+      {
+        "id": 4,
+        "title": "Hack Life",
+        "description": "Rak Piring Stainless Steel 2 Tingkat sebagai life hack yang tidak terduga",
+        "hook": "POV: kamu akhirnya nemuin solusi buat masalah ini",
+        "angle": "Day in Life",
+        "flow": "Hook POV → Masalah relate → Solusi tak terduga → Reaksi → CTA",
+        "expectedImpact": "Viral Potential Tinggi"
+      },
+      {
+        "id": 5,
+        "title": "Versus Premium",
+        "description": "Bandingkan dengan produk premium yang jauh lebih mahal",
+        "hook": "Produk Rp149.000 ini mengalahkan yang jutaan!",
+        "angle": "Social Proof",
+        "flow": "Hook harga → Tunjukkan premium → Tunjukkan produk → Tes side-by-side → Reveal harga → CTA",
+        "expectedImpact": "CVR Sangat Tinggi"
+      }
+    ],
+    "bestConcept": {
+      "index": 0,
+      "reason": "Konsep \"Masalah Sehari-hari\" dipilih karena angle Problem→Solution secara konsisten menghasilkan CTR dan CVR tertinggi untuk produk di kategori ini. Dengan objective Click pada platform TikTok, pendekatan ini paling efektif untuk mengubah viewer menjadi buyer. Hook yang digunakan menciptakan curiosity gap yang kuat, dan flow konten mengarahkan langsung ke purchase intent."
+    },
+    "status": "generated",
+    "createdAt": "2026-09-14T02:04:37.670Z",
+    "updatedAt": "2026-09-14T02:04:37.670Z"
+  },
+  {
+    "id": "51a9176e-c1b3-4e33-9e61-897e9794a299",
+    "productId": "f9863b66-f500-475a-95ae-779962b86ef5",
+    "platform": "TikTok",
+    "duration": "10 detik",
+    "style": "Problem-Solution",
+    "objective": "Konversi Affiliate Langsung",
+    "targetAudience": "Ibu rumah tangga, pengguna dapur",
+    "hooks": [
+      {
+        "id": 1,
+        "text": "Stop! Jangan beli Rak Piring Stainless Steel 2 Tingkat sebelum nonton ini...",
+        "type": "Curiosity Gap",
+        "strength": "Tinggi"
+      },
+      {
+        "id": 2,
+        "text": "Aku nyesel baru tau Rak Piring Stainless Steel 2 Tingkat sekarang 😭",
+        "type": "Emotional Regret",
+        "strength": "Tinggi"
+      },
+      {
+        "id": 3,
+        "text": "Rak Piring Stainless Steel 2 Tingkat ini bikin hidupku berubah drastis...",
+        "type": "Transformation",
+        "strength": "Tinggi"
+      },
+      {
+        "id": 4,
+        "text": "Kalau kamu masih pakai cara lama, kasian banget...",
+        "type": "Pain Point",
+        "strength": "Sedang"
+      },
+      {
+        "id": 5,
+        "text": "Produk Rp149.000 ini mengalahkan yang jutaan!",
+        "type": "Value Comparison",
+        "strength": "Tinggi"
+      },
+      {
+        "id": 6,
+        "text": "3 detik! Cuma 3 detik pakai Rak Piring Stainless Steel 2 Tingkat dan hasilnya...",
+        "type": "Speed/Result",
+        "strength": "Tinggi"
+      },
+      {
+        "id": 7,
+        "text": "Jangan sampai kamu terlambat kayak aku...",
+        "type": "Urgency",
+        "strength": "Sedang"
+      },
+      {
+        "id": 8,
+        "text": "Review jujur Rak Piring Stainless Steel 2 Tingkat setelah 30 hari pakai",
+        "type": "Honest Review",
+        "strength": "Sedang"
+      },
+      {
+        "id": 9,
+        "text": "POV: kamu akhirnya nemuin solusi buat masalah ini",
+        "type": "POV/Relatable",
+        "strength": "Tinggi"
+      },
+      {
+        "id": 10,
+        "text": "Yang bilang produk murah pasti jelek, coba lihat ini...",
+        "type": "Myth Buster",
+        "strength": "Tinggi"
+      }
+    ],
+    "angles": [
+      {
+        "id": 1,
+        "name": "Problem → Solution",
+        "description": "Tunjukkan masalah yang diselesaikan Rak Piring Stainless Steel 2 Tingkat",
+        "targetEmotion": "Frustrasi → Lega",
+        "score": 92
+      },
+      {
+        "id": 2,
+        "name": "Before → After",
+        "description": "Transformasi visual yang dramatis",
+        "targetEmotion": "Penasaran → Kagum",
+        "score": 87
+      },
+      {
+        "id": 3,
+        "name": "Day in Life",
+        "description": "Integrasikan Rak Piring Stainless Steel 2 Tingkat dalam rutinitas harian",
+        "targetEmotion": "Relate → Tertarik",
+        "score": 78
+      },
+      {
+        "id": 4,
+        "name": "Expert Review",
+        "description": "Ulasan mendalam dengan fakta dan demo",
+        "targetEmotion": "Ragu → Percaya",
+        "score": 75
+      },
+      {
+        "id": 5,
+        "name": "Social Proof",
+        "description": "Reaksi orang lain saat melihat produk",
+        "targetEmotion": "Penasaran → FOMO",
+        "score": 80
+      }
+    ],
+    "concepts": [
+      {
+        "id": 1,
+        "title": "Masalah Sehari-hari",
+        "description": "Video dimulai dengan situasi frustrasi tanpa Rak Piring Stainless Steel 2 Tingkat, lalu transisi ke solusi",
+        "hook": "Stop! Jangan beli Rak Piring Stainless Steel 2 Tingkat sebelum nonton ini...",
+        "angle": "Problem → Solution",
+        "flow": "Hook frustrasi → Tunjukkan masalah → Perkenalkan Rak Piring Stainless Steel 2 Tingkat → Demo solusi → CTA",
+        "expectedImpact": "CTR Tinggi, CVR Sedang-Tinggi"
+      },
+      {
+        "id": 2,
+        "title": "Transformasi Dramatis",
+        "description": "Split screen before-after yang memukau",
+        "hook": "Rak Piring Stainless Steel 2 Tingkat ini bikin hidupku berubah drastis...",
+        "angle": "Before → After",
+        "flow": "Hook transformasi → Before (messy/old) → Proses → After (clean/new) → CTA",
+        "expectedImpact": "Views Tinggi, Share Tinggi"
+      },
+      {
+        "id": 3,
+        "title": "Honest 30-Day Review",
+        "description": "Review jujur setelah pemakaian",
+        "hook": "Review jujur Rak Piring Stainless Steel 2 Tingkat setelah 30 hari pakai",
+        "angle": "Expert Review",
+        "flow": "Hook jujur → Ekspektasi → Realita → Pro & Con → Verdict → CTA",
+        "expectedImpact": "Trust Tinggi, CVR Tinggi"
+      },
+      {
+        "id": 4,
+        "title": "Hack Life",
+        "description": "Rak Piring Stainless Steel 2 Tingkat sebagai life hack yang tidak terduga",
+        "hook": "POV: kamu akhirnya nemuin solusi buat masalah ini",
+        "angle": "Day in Life",
+        "flow": "Hook POV → Masalah relate → Solusi tak terduga → Reaksi → CTA",
+        "expectedImpact": "Viral Potential Tinggi"
+      },
+      {
+        "id": 5,
+        "title": "Versus Premium",
+        "description": "Bandingkan dengan produk premium yang jauh lebih mahal",
+        "hook": "Produk Rp149.000 ini mengalahkan yang jutaan!",
+        "angle": "Social Proof",
+        "flow": "Hook harga → Tunjukkan premium → Tunjukkan produk → Tes side-by-side → Reveal harga → CTA",
+        "expectedImpact": "CVR Sangat Tinggi"
+      }
+    ],
+    "bestConcept": {
+      "index": 0,
+      "reason": "Konsep \"Masalah Sehari-hari\" dipilih karena angle Problem→Solution secara konsisten menghasilkan CTR dan CVR tertinggi untuk produk di kategori ini. Dengan objective Konversi Affiliate Langsung pada platform TikTok, pendekatan ini paling efektif untuk mengubah viewer menjadi buyer. Hook yang digunakan menciptakan curiosity gap yang kuat, dan flow konten mengarahkan langsung ke purchase intent."
+    },
+    "status": "generated",
+    "createdAt": "2026-09-14T02:15:35.469Z",
+    "updatedAt": "2026-09-14T02:15:37.831Z",
+    "storyboard": {
+      "scenes": [
+        {
+          "sceneNumber": 1,
+          "timeRange": "0-2 detik",
+          "visual": "Close-up tangan menunjukkan masalah yang diselesaikan Rak Piring Stainless Steel 2 Tingkat. Latar belakang sedikit blur, fokus pada ekspresi frustrasi.",
+          "camera": "Close-up, handheld slight movement",
+          "action": "Talent menunjukkan situasi bermasalah. Text overlay: \"Stop! Jangan beli Rak Piring Stainless Steel 2 Tingkat sebelum nonton ini...\"",
+          "purpose": "Hook — menarik perhatian dengan masalah yang relatable"
+        },
+        {
+          "sceneNumber": 2,
+          "timeRange": "2-5 detik",
+          "visual": "Transisi smooth ke Rak Piring Stainless Steel 2 Tingkat. Produk ditampilkan dengan pencahayaan yang baik, angle 3/4 menunjukkan detail.",
+          "camera": "Medium shot, smooth slide right",
+          "action": "Talent mengambil Rak Piring Stainless Steel 2 Tingkat dan mulai menggunakannya. Quick cut ke detail produk.",
+          "purpose": "Introduce — memperkenalkan produk sebagai solusi"
+        },
+        {
+          "sceneNumber": 3,
+          "timeRange": "5-8 detik",
+          "visual": "Demo langsung penggunaan Rak Piring Stainless Steel 2 Tingkat. Hasil terlihat jelas dengan before-after mini.",
+          "camera": "Wide to close-up transition",
+          "action": "Demonstrasi efek/hasil penggunaan. Ekspresi puas/kagum dari talent.",
+          "purpose": "Demonstrate — menunjukkan produk bekerja nyata"
+        },
+        {
+          "sceneNumber": 4,
+          "timeRange": "8-10 detik",
+          "visual": "Rak Piring Stainless Steel 2 Tingkat ditampilkan dengan harga dan CTA. Background clean, produk center frame.",
+          "camera": "Static, product center",
+          "action": "Talent menunjuk produk. Text overlay: \"Cek link di bio!\" dengan harga.",
+          "purpose": "CTA — mendorong klik dan pembelian"
+        }
+      ],
+      "productConsistencyRules": [
+        "Preserve exact product shape",
+        "Preserve exact color",
+        "Preserve exact material",
+        "Preserve exact logo",
+        "Preserve exact proportions",
+        "Do not redesign",
+        "Do not replace product",
+        "Do not add unrelated product features"
+      ],
+      "totalDuration": "10 detik"
+    },
+    "videoPrompt": {
+      "duration": "10 seconds",
+      "aspect_ratio": "9:16",
+      "style": "Problem-Solution",
+      "product_consistency": {
+        "reference_image": true,
+        "preserve_exact_product": true,
+        "do_not_redesign": true
+      },
+      "scenes": [
+        {
+          "time": "0-2s",
+          "visual": "Close-up tangan menunjukkan masalah yang diselesaikan Rak Piring Stainless Steel 2 Tingkat. Latar belakang sedikit blur, fokus pada ekspresi frustrasi.",
+          "camera": "Close-up, handheld slight movement",
+          "action": "Talent menunjukkan situasi bermasalah. Text overlay: \"Stop! Jangan beli Rak Piring Stainless Steel 2 Tingkat sebelum nonton ini...\"",
+          "lighting": "Natural, slightly moody"
+        },
+        {
+          "time": "2-5s",
+          "visual": "Transisi smooth ke Rak Piring Stainless Steel 2 Tingkat. Produk ditampilkan dengan pencahayaan yang baik, angle 3/4 menunjukkan detail.",
+          "camera": "Medium shot, smooth slide right",
+          "action": "Talent mengambil Rak Piring Stainless Steel 2 Tingkat dan mulai menggunakannya. Quick cut ke detail produk.",
+          "lighting": "Well-lit, product-focused"
+        },
+        {
+          "time": "5-8s",
+          "visual": "Demo langsung penggunaan Rak Piring Stainless Steel 2 Tingkat. Hasil terlihat jelas dengan before-after mini.",
+          "camera": "Wide to close-up transition",
+          "action": "Demonstrasi efek/hasil penggunaan. Ekspresi puas/kagum dari talent.",
+          "lighting": "Well-lit, product-focused"
+        },
+        {
+          "time": "8-10s",
+          "visual": "Rak Piring Stainless Steel 2 Tingkat ditampilkan dengan harga dan CTA. Background clean, produk center frame.",
+          "camera": "Static, product center",
+          "action": "Talent menunjuk produk. Text overlay: \"Cek link di bio!\" dengan harga.",
+          "lighting": "Bright, clean, professional"
+        }
+      ],
+      "negative_prompt": [
+        "product redesign",
+        "different product",
+        "distorted product",
+        "extra logo",
+        "wrong proportions",
+        "text overlay unless specified",
+        "watermark",
+        "blurry product",
+        "wrong colors"
+      ]
+    }
+  }
+]

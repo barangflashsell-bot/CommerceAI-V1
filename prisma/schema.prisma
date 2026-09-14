@@ -1,0 +1,235 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String?  @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id               String   @id @default(cuid())
+  name             String
+  link             String
+  category         String
+  price            Float
+  commissionRate   Float
+  imageUrl         String?
+  targetAudience   String
+  description      String
+  advantages       String
+  problemSolved    String
+  opportunityScore Float?
+  aiAnalysis       String?  // JSON stored as string for SQLite (score dimensions & details)
+  status           String   @default("DISCOVERED") // DISCOVERED | TESTING | OPTIMIZE | SCALE | KILL
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  contentProjects    ContentProject[]
+  performanceMetrics PerformanceMetric[]
+  scoutAnalysis      ScoutAnalysis?
+  testingPlan        TestingPlan?
+  experiments        Experiment[]
+}
+
+model ContentProject {
+  id             String   @id @default(cuid())
+  productId      String
+  platform       String
+  duration       String
+  style          String
+  objective      String
+  targetAudience String
+  hooks          String?  // JSON
+  angles         String?  // JSON
+  concepts       String?  // JSON
+  bestConcept    String?  // JSON
+  storyboard     String?  // JSON
+  videoPrompt    String?  // JSON
+  status         String   @default("draft")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  product     Product            @relation(fields: [productId], references: [id], onDelete: Cascade)
+  variations  ContentVariation[]
+  experiments Experiment[]
+}
+
+model ContentVariation {
+  id               String   @id @default(cuid())
+  contentProjectId String
+  title            String?
+  hookUsed         String?
+  angleUsed        String?
+  conceptUsed      String?
+  storyboard       String?  // JSON
+  videoPrompt      String?  // JSON
+  status           String   @default("draft")
+  createdAt        DateTime @default(now())
+
+  contentProject     ContentProject      @relation(fields: [contentProjectId], references: [id], onDelete: Cascade)
+  performanceMetrics PerformanceMetric[]
+}
+
+model PerformanceMetric {
+  id                 String   @id @default(cuid())
+  productId          String
+  contentVariationId String?
+  contentId          String?
+  experimentId       String?
+  externalPostId     String?  @unique // Unique TikTok / Metricool post identifier for deduplication
+  date               DateTime @default(now())
+  platform           String
+  views              Int      @default(0)
+  likes              Int      @default(0)
+  comments           Int      @default(0)
+  shares             Int      @default(0)
+  clicks             Int      @default(0)
+  addToCart          Int      @default(0)
+  orders             Int      @default(0)
+  commission         Float    @default(0)
+  videoConcept       String?
+  hook               String?
+  angle              String?
+  ctr                Float?
+  cvr                Float?
+  revenue            Float?
+  reach              Int?
+  watchRate          Float?
+  averageWatchTime   Float?
+  engagementRate     Float?
+  forYouViews        Int?
+  searchViews        Int?
+  soundViews         Int?
+  profileViews       Int?
+  dataSource         String   @default("PERFORMANCE BASED")
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  product          Product           @relation(fields: [productId], references: [id], onDelete: Cascade)
+  contentVariation ContentVariation? @relation(fields: [contentVariationId], references: [id])
+  experiment       Experiment?       @relation(fields: [experimentId], references: [id], onDelete: SetNull)
+}
+
+model AiInsight {
+  id          String   @id @default(cuid())
+  type        String
+  title       String
+  content     String   // JSON
+  productId   String?
+  confidence  Float?
+  actionItems String?  // JSON
+  metadata    String?  // JSON
+  createdAt   DateTime @default(now())
+}
+
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model AiLog {
+  id        String   @id @default(cuid())
+  provider  String
+  model     String
+  operation String
+  success   Boolean
+  latencyMs Int
+  tokens    Int?
+  error     String?
+  createdAt DateTime @default(now())
+}
+
+model ScoutAnalysis {
+  id           String   @id @default(cuid())
+  productId    String   @unique
+  score        Float
+  category     String   // HIGH OPPORTUNITY | TEST | LOW SIGNAL | AVOID
+  breakdown    String   // JSON: 7 dimensions
+  why          String
+  risks        String   // JSON
+  bestAngles   String   // JSON
+  testingPlan  String   // JSON
+  expectedGoal String
+  dataSource   String   @default("AI ESTIMATE") // AI ESTIMATE | PERFORMANCE BASED
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model TestingPlan {
+  id                  String   @id @default(cuid())
+  productId           String   @unique
+  testDays            Int      @default(7)
+  videoCount          Int      @default(10)
+  angles              String   // JSON
+  hooks               String   // JSON
+  platforms           String   // JSON
+  successCriteria     String   // JSON: { minimumCTR: 0.02, minimumCVR: 0.03, minimumRPM: 15000 }
+  thresholdType       String   @default("AI TESTING THRESHOLD")
+  userCustomThreshold String?  // JSON
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model Experiment {
+  id                 String    @id @default(cuid())
+  name               String
+  productId          String
+  contentProjectId   String?
+  contentVariationId String?
+  externalPostId     String?   @unique // Metricool/TikTok post ID for deduplication
+  angle              String
+  hook               String
+  platform           String    @default("TikTok")
+  duration           String    @default("15s")
+  objective          String    @default("Conversion")
+  status             String    @default("DRAFT") // DRAFT | READY | PUBLISHED | MEASURING | WINNER | LOSER
+  winnerType         String?   // "Content Performance Winner" | "Sales Winner"
+  scheduledAt        DateTime?
+  publishedAt        DateTime?
+  videoUrl           String?
+  caption            String?
+  hashtags           String?
+  targetAccount      String    @default("onesecond.id3")
+  privacy            String    @default("PUBLIC_TO_EVERYONE")
+  aiGeneratedContent Boolean   @default(false)
+
+  // Synced Metrics from Metricool
+  views              Int       @default(0)
+  likes              Int       @default(0)
+  comments           Int       @default(0)
+  shares             Int       @default(0)
+  reach              Int       @default(0)
+  watchRate          Float     @default(0)
+  averageWatchTime   Float     @default(0)
+  engagementRate     Float     @default(0)
+  forYouViews        Int       @default(0)
+  searchViews        Int       @default(0)
+  soundViews         Int       @default(0)
+  profileViews       Int       @default(0)
+  orders             Int       @default(0)
+  revenue            Float     @default(0)
+  rpm                Float     @default(0)
+  dataSource         String    @default("METRICOOL REAL DATA")
+  notes              String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  product            Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  contentProject     ContentProject? @relation(fields: [contentProjectId], references: [id], onDelete: SetNull)
+  performanceMetrics PerformanceMetric[]
+}

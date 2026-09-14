@@ -1,0 +1,292 @@
+[
+  {
+    "id": "f9863b66-f500-475a-95ae-779962b86ef5",
+    "name": "Rak Piring Stainless Steel 2 Tingkat",
+    "link": "https://tokopedia.link/rakpiring",
+    "category": "Home & Living",
+    "price": 89000,
+    "commissionRate": 10,
+    "targetAudience": "Ibu rumah tangga, pengguna dapur",
+    "description": "Rak piring stainless steel 2 tingkat anti karat, cocok untuk dapur modern dan minimalis. Kapasitas besar untuk piring, gelas, dan alat makan lainnya.",
+    "advantages": "Anti karat, kokoh, mudah dipasang, desain modern, kapasitas besar, hemat ruang",
+    "problemSolved": "Dapur berantakan karena piring bertumpuk tanpa rak, air cucian piring menggenang, piring mudah pecah karena ditumpuk sembarangan",
+    "createdAt": "2026-09-14T02:03:57.208Z",
+    "updatedAt": "2026-09-14T02:04:06.254Z",
+    "opportunityScore": 72,
+    "aiAnalysis": {
+      "opportunityScore": 72,
+      "breakdown": {
+        "demandPotential": 75,
+        "contentPotential": 72.7,
+        "problemSolutionStrength": 78,
+        "purchaseIntent": 51.4,
+        "commissionAttractiveness": 90,
+        "competitionRisk": 51
+      },
+      "reasoning": "[AI Estimated Score] Produk \"Rak Piring Stainless Steel 2 Tingkat\" memiliki skor peluang 72/100. Produk dalam kategori Home & Living dengan harga 89.000 memiliki potensi demand yang baik di pasar affiliate. Komisi 10% memberikan insentif yang menarik untuk promosi. Estimasi ini berdasarkan analisis input yang diberikan, bukan data marketplace aktual.",
+      "targetAudience": [
+        "Ibu rumah tangga, pengguna dapur",
+        "Pengguna yang mencari solusi untuk Dapur berantakan karena piring bertumpuk tanpa rak",
+        "Pembeli online yang tertarik dengan kategori Home & Living",
+        "Pengguna media sosial yang aktif mencari rekomendasi produk"
+      ],
+      "painPoints": [
+        "Dapur berantakan karena piring bertumpuk tanpa rak, air cucian piring menggenang, piring mudah pecah karena ditumpuk sembarangan",
+        "Kesulitan menemukan Home & Living yang berkualitas dengan harga terjangkau",
+        "Produk sejenis sering tidak sesuai ekspektasi",
+        "Kurangnya informasi detail sebelum membeli"
+      ],
+      "buyingTriggers": [
+        "Harga promo terbatas",
+        "Review positif dari pengguna lain",
+        "Demonstrasi penggunaan yang meyakinkan",
+        "Perbandingan dengan alternatif yang lebih mahal",
+        "Social proof dari konten kreator"
+      ],
+      "sellingProposition": "Rak Piring Stainless Steel 2 Tingkat adalah solusi Home & Living yang mengatasi Dapur berantakan karena piring bertumpuk tanpa rak, air cucian piring menggenang. Dengan keunggulan Anti karat, kokoh, mudah dipasang, desain modern, kapasitas besar, hemat ruang, produk ini menawarkan nilai terbaik di kelasnya.",
+      "contentAngles": [
+        {
+          "name": "Problem → Solution",
+          "description": "Tunjukkan masalah Dapur berantakan karena piring bertumpuk lalu solusinya",
+          "score": 88,
+          "reason": "Angle paling efektif untuk produk yang memecahkan masalah nyata"
+        },
+        {
+          "name": "Before → After",
+          "description": "Transformasi visual sebelum dan sesudah penggunaan",
+          "score": 82,
+          "reason": "Visual yang kuat meningkatkan engagement"
+        },
+        {
+          "name": "Demonstration",
+          "description": "Demo langsung cara penggunaan produk",
+          "score": 79,
+          "reason": "Menunjukkan fungsi nyata membangun kepercayaan"
+        },
+        {
+          "name": "Unexpected Use",
+          "description": "Penggunaan kreatif yang tidak terduga",
+          "score": 73,
+          "reason": "Konten unik cenderung viral"
+        },
+        {
+          "name": "Comparison",
+          "description": "Bandingkan dengan alternatif lain",
+          "score": 71,
+          "reason": "Membantu pembeli membuat keputusan"
+        },
+        {
+          "name": "Convenience",
+          "description": "Highlight kemudahan penggunaan",
+          "score": 68,
+          "reason": "Relevan untuk pembeli yang mencari solusi praktis"
+        },
+        {
+          "name": "Affordable Upgrade",
+          "description": "Upgrade terjangkau dari solusi lama",
+          "score": 65,
+          "reason": "Menarik bagi pembeli yang sadar budget"
+        }
+      ],
+      "whyPromote": "Produk Rak Piring Stainless Steel 2 Tingkat layak dipromosikan karena mengatasi masalah nyata (Dapur berantakan karena piring bertumpuk tanpa rak, air cuci), memiliki komisi 10% yang kompetitif, dan berada dalam kategori Home & Living yang memiliki demand tinggi di platform social commerce. Keunggulan utama produk (Anti karat, kokoh, mudah dipasang, desain modern, kapasitas besar, hemat ruang) memberikan angle konten yang kuat untuk berbagai format video pendek."
+    }
+  },
+  {
+    "id": "cf636c74-f37f-44ca-9f36-9e6e66e0ec9f",
+    "name": "Audit Test Product 1789352014682",
+    "link": "https://shopee.co.id/audit-test",
+    "category": "Elektronik",
+    "price": 150000,
+    "commissionRate": 10,
+    "targetAudience": "Tech enthusiasts",
+    "description": "Deskripsi produk testing audit",
+    "advantages": "Fitur A, Fitur B",
+    "problemSolved": "Masalah baterai boros",
+    "createdAt": "2026-09-14T02:13:34.730Z",
+    "updatedAt": "2026-09-14T02:13:34.730Z"
+  },
+  {
+    "id": "698603b1-f348-417e-940d-ccc430a9a564",
+    "name": "Wireless Ergonomic Keyboard K90 PRO",
+    "link": "https://shopee.co.id/product/dummy-keyboard",
+    "category": "Elektronik",
+    "price": 399000,
+    "commissionRate": 8,
+    "targetAudience": "Pekerja WFH, programmer, desainer yang sering pegal",
+    "description": "Keyboard ergonomis nirkabel dengan layout split dan wrist rest busa memori",
+    "advantages": "Baterai tahan 3 bulan, switch silent tidak berisik, koneksi multi-device",
+    "problemSolved": "Mencegah carpal tunnel syndrome dan pegal pergelangan tangan",
+    "createdAt": "2026-09-14T02:14:39.666Z",
+    "updatedAt": "2026-09-14T02:14:48.374Z",
+    "opportunityScore": 69,
+    "aiAnalysis": {
+      "opportunityScore": 69,
+      "breakdown": {
+        "demandPotential": 65,
+        "contentPotential": 64.6,
+        "problemSolutionStrength": 78,
+        "purchaseIntent": 55.2,
+        "commissionAttractiveness": 80,
+        "competitionRisk": 65
+      },
+      "reasoning": "[AI Estimated Score] Produk \"Wireless Ergonomic Keyboard K90\" memiliki skor peluang 69/100. Produk dalam kategori Elektronik dengan harga 349.000 memiliki potensi demand yang cukup di pasar affiliate. Komisi 8% memberikan insentif yang menarik untuk promosi. Estimasi ini berdasarkan analisis input yang diberikan, bukan data marketplace aktual.",
+      "targetAudience": [
+        "Pekerja WFH, programmer, desainer yang sering pegal",
+        "Pengguna yang mencari solusi untuk Mencegah carpal tunnel syndrome dan pegal pergelan",
+        "Pembeli online yang tertarik dengan kategori Elektronik",
+        "Pengguna media sosial yang aktif mencari rekomendasi produk"
+      ],
+      "painPoints": [
+        "Mencegah carpal tunnel syndrome dan pegal pergelangan tangan",
+        "Kesulitan menemukan Elektronik yang berkualitas dengan harga terjangkau",
+        "Produk sejenis sering tidak sesuai ekspektasi",
+        "Kurangnya informasi detail sebelum membeli"
+      ],
+      "buyingTriggers": [
+        "Harga promo terbatas",
+        "Review positif dari pengguna lain",
+        "Demonstrasi penggunaan yang meyakinkan",
+        "Perbandingan dengan alternatif yang lebih mahal",
+        "Social proof dari konten kreator"
+      ],
+      "sellingProposition": "Wireless Ergonomic Keyboard K90 adalah solusi Elektronik yang mengatasi Mencegah carpal tunnel syndrome dan pegal pergelangan tangan. Dengan keunggulan Baterai tahan 3 bulan, switch silent tidak berisik, koneksi multi-device, produk ini menawarkan nilai terbaik di kelasnya.",
+      "contentAngles": [
+        {
+          "name": "Problem → Solution",
+          "description": "Tunjukkan masalah Mencegah carpal tunnel syndrome dan pega lalu solusinya",
+          "score": 88,
+          "reason": "Angle paling efektif untuk produk yang memecahkan masalah nyata"
+        },
+        {
+          "name": "Before → After",
+          "description": "Transformasi visual sebelum dan sesudah penggunaan",
+          "score": 82,
+          "reason": "Visual yang kuat meningkatkan engagement"
+        },
+        {
+          "name": "Demonstration",
+          "description": "Demo langsung cara penggunaan produk",
+          "score": 79,
+          "reason": "Menunjukkan fungsi nyata membangun kepercayaan"
+        },
+        {
+          "name": "Unexpected Use",
+          "description": "Penggunaan kreatif yang tidak terduga",
+          "score": 73,
+          "reason": "Konten unik cenderung viral"
+        },
+        {
+          "name": "Comparison",
+          "description": "Bandingkan dengan alternatif lain",
+          "score": 71,
+          "reason": "Membantu pembeli membuat keputusan"
+        },
+        {
+          "name": "Convenience",
+          "description": "Highlight kemudahan penggunaan",
+          "score": 68,
+          "reason": "Relevan untuk pembeli yang mencari solusi praktis"
+        },
+        {
+          "name": "Affordable Upgrade",
+          "description": "Upgrade terjangkau dari solusi lama",
+          "score": 65,
+          "reason": "Menarik bagi pembeli yang sadar budget"
+        }
+      ],
+      "whyPromote": "Produk Wireless Ergonomic Keyboard K90 layak dipromosikan karena mengatasi masalah nyata (Mencegah carpal tunnel syndrome dan pegal pergelangan tangan), memiliki komisi 8% yang kompetitif, dan berada dalam kategori Elektronik yang memiliki demand tinggi di platform social commerce. Keunggulan utama produk (Baterai tahan 3 bulan, switch silent tidak berisik, koneksi multi-device) memberikan angle konten yang kuat untuk berbagai format video pendek."
+    }
+  },
+  {
+    "id": "b0b16df7-6124-4d3e-ab93-3cb19d76f519",
+    "name": "Serum Wajah Centella Asiatica 30ml",
+    "link": "https://shopee.co.id/product/dummy-serum",
+    "category": "Beauty",
+    "price": 89000,
+    "commissionRate": 15,
+    "targetAudience": "Wanita 18-35 tahun dengan kulit kemerahan dan jerawat",
+    "description": "Serum penenang kulit dengan ekstrak centella asiatica 85% dan niacinamide",
+    "advantages": "Cepat meresap, non-comedogenic, bersertifikat BPOM & halal",
+    "problemSolved": "Meredakan iritasi kemerahan dan memperbaiki skin barrier yang rusak",
+    "createdAt": "2026-09-14T02:14:39.680Z",
+    "updatedAt": "2026-09-14T02:14:45.747Z",
+    "opportunityScore": 74,
+    "aiAnalysis": {
+      "opportunityScore": 74,
+      "breakdown": {
+        "demandPotential": 75,
+        "contentPotential": 63.1,
+        "problemSolutionStrength": 78,
+        "purchaseIntent": 55.6,
+        "commissionAttractiveness": 95,
+        "competitionRisk": 75
+      },
+      "reasoning": "[AI Estimated Score] Produk \"Serum Wajah Centella Asiatica 30ml\" memiliki skor peluang 74/100. Produk dalam kategori Beauty dengan harga 89.000 memiliki potensi demand yang baik di pasar affiliate. Komisi 15% memberikan insentif yang menarik untuk promosi. Estimasi ini berdasarkan analisis input yang diberikan, bukan data marketplace aktual.",
+      "targetAudience": [
+        "Wanita 18-35 tahun dengan kulit kemerahan dan jerawat",
+        "Pengguna yang mencari solusi untuk Meredakan iritasi kemerahan dan memperbaiki skin b",
+        "Pembeli online yang tertarik dengan kategori Beauty",
+        "Pengguna media sosial yang aktif mencari rekomendasi produk"
+      ],
+      "painPoints": [
+        "Meredakan iritasi kemerahan dan memperbaiki skin barrier yang rusak",
+        "Kesulitan menemukan Beauty yang berkualitas dengan harga terjangkau",
+        "Produk sejenis sering tidak sesuai ekspektasi",
+        "Kurangnya informasi detail sebelum membeli"
+      ],
+      "buyingTriggers": [
+        "Harga promo terbatas",
+        "Review positif dari pengguna lain",
+        "Demonstrasi penggunaan yang meyakinkan",
+        "Perbandingan dengan alternatif yang lebih mahal",
+        "Social proof dari konten kreator"
+      ],
+      "sellingProposition": "Serum Wajah Centella Asiatica 30ml adalah solusi Beauty yang mengatasi Meredakan iritasi kemerahan dan memperbaiki skin barrier yang rusak. Dengan keunggulan Cepat meresap, non-comedogenic, bersertifikat BPOM & halal, produk ini menawarkan nilai terbaik di kelasnya.",
+      "contentAngles": [
+        {
+          "name": "Problem → Solution",
+          "description": "Tunjukkan masalah Meredakan iritasi kemerahan dan memperba lalu solusinya",
+          "score": 88,
+          "reason": "Angle paling efektif untuk produk yang memecahkan masalah nyata"
+        },
+        {
+          "name": "Before → After",
+          "description": "Transformasi visual sebelum dan sesudah penggunaan",
+          "score": 82,
+          "reason": "Visual yang kuat meningkatkan engagement"
+        },
+        {
+          "name": "Demonstration",
+          "description": "Demo langsung cara penggunaan produk",
+          "score": 79,
+          "reason": "Menunjukkan fungsi nyata membangun kepercayaan"
+        },
+        {
+          "name": "Unexpected Use",
+          "description": "Penggunaan kreatif yang tidak terduga",
+          "score": 73,
+          "reason": "Konten unik cenderung viral"
+        },
+        {
+          "name": "Comparison",
+          "description": "Bandingkan dengan alternatif lain",
+          "score": 71,
+          "reason": "Membantu pembeli membuat keputusan"
+        },
+        {
+          "name": "Convenience",
+          "description": "Highlight kemudahan penggunaan",
+          "score": 68,
+          "reason": "Relevan untuk pembeli yang mencari solusi praktis"
+        },
+        {
+          "name": "Affordable Upgrade",
+          "description": "Upgrade terjangkau dari solusi lama",
+          "score": 65,
+          "reason": "Menarik bagi pembeli yang sadar budget"
+        }
+      ],
+      "whyPromote": "Produk Serum Wajah Centella Asiatica 30ml layak dipromosikan karena mengatasi masalah nyata (Meredakan iritasi kemerahan dan memperbaiki skin barrier yan), memiliki komisi 15% yang kompetitif, dan berada dalam kategori Beauty yang memiliki demand tinggi di platform social commerce. Keunggulan utama produk (Cepat meresap, non-comedogenic, bersertifikat BPOM & halal) memberikan angle konten yang kuat untuk berbagai format video pendek."
+    }
+  }
+]
